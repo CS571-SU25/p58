@@ -52,6 +52,7 @@ export default function WeeklySummary() {
     });
   }, []);
 
+  //Graph
   const barData = {
     labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     datasets: [
