@@ -86,63 +86,76 @@ export default function LogBetModal({ onClose, setPendingBets }) {
         {legs.map((leg, index) => (
           <div key={index} style={{ marginTop: "1rem", padding: "1rem", border: "1px solid var(--primary-color)", borderRadius: "6px" }}>
             <p><strong style={{ color: 'var(--primary-color)' }}>Leg {index + 1}</strong></p>
-            <input
-              type="text"
-              placeholder="Player Name"
-              value={leg.playerName}
-              onChange={(e) => handleLegChange(index, "playerName", e.target.value)}
-              style={{
-                color: leg.playerName ? 'var(--primary-color)' : undefined,
-                border: errors.legs[index] && !leg.playerName ? '2px solid red' : undefined
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Line"
-              value={leg.line}
-              onChange={(e) => handleLegChange(index, "line", e.target.value)}
-              style={{
-                color: leg.line ? 'var(--primary-color)' : undefined,
-                border: errors.legs[index] && !leg.line ? '2px solid red' : undefined
-              }}
-            />
-            <select
-              value={leg.stat}
-              onChange={(e) => handleLegChange(index, "stat", e.target.value)}
-              style={{
-                color: leg.stat ? 'var(--primary-color)' : 'grey',
-                border: errors.legs[index] && !leg.stat ? '2px solid red' : undefined
-              }}
-            >
-              <option value="" disabled hidden style={{ color: errors.legs[index] ? 'red' : 'grey' }}>Stat</option>
-              <option value="P">Points</option>
-              <option value="R">Rebounds</option>
-              <option value="A">Assists</option>
-              <option value="P+R">P+R</option>
-              <option value="P+A">P+A</option>
-              <option value="R+A">R+A</option>
-              <option value="P+R+A">P+R+A</option>
-            </select>
-            <select
-              value={leg.overUnder}
-              onChange={(e) => handleLegChange(index, "overUnder", e.target.value)}
-              style={{
-                color: leg.overUnder ? 'var(--primary-color)' : 'grey',
-                border: errors.legs[index] && !leg.overUnder ? '2px solid red' : undefined
-              }}
-            >
-              <option value="" disabled hidden style={{ color: errors.legs[index] ? 'red' : 'grey' }}>Over/Under</option>
-              <option value="Over">Over</option>
-              <option value="Under">Under</option>
-            </select>
+            <label htmlFor={`playerName-${index}`}>
+              <input
+                id={`playerName-${index}`}
+                type="text"
+                placeholder="Player Name"
+                value={leg.playerName}
+                onChange={(e) => handleLegChange(index, "playerName", e.target.value)}
+                style={{
+                  color: leg.playerName ? 'var(--primary-color)' : undefined,
+                  border: errors.legs[index] && !leg.playerName ? '2px solid red' : undefined
+                }}
+              />
+            </label>
+            <label htmlFor={`line-${index}`}>
+              <input
+                id={`line-${index}`}
+                type="text"
+                placeholder="Line"
+                value={leg.line}
+                onChange={(e) => handleLegChange(index, "line", e.target.value)}
+                style={{
+                  color: leg.line ? 'var(--primary-color)' : undefined,
+                  border: errors.legs[index] && !leg.line ? '2px solid red' : undefined
+                }}
+              />
+            </label>
+            <label htmlFor={`stat-${index}`}>
+              <select
+                id={`stat-${index}`}
+                value={leg.stat}
+                onChange={(e) => handleLegChange(index, "stat", e.target.value)}
+                style={{
+                  color: leg.stat ? 'var(--primary-color)' : 'grey',
+                  border: errors.legs[index] && !leg.stat ? '2px solid red' : undefined
+                }}
+              >
+                <option value="" disabled hidden style={{ color: errors.legs[index] ? 'red' : 'grey' }}>Stat</option>
+                <option value="P">Points</option>
+                <option value="R">Rebounds</option>
+                <option value="A">Assists</option>
+                <option value="P+R">P+R</option>
+                <option value="P+A">P+A</option>
+                <option value="R+A">R+A</option>
+                <option value="P+R+A">P+R+A</option>
+              </select>
+            </label>
+            <label htmlFor={`overUnder-${index}`}>
+              <select
+                id={`overUnder-${index}`}
+                value={leg.overUnder}
+                onChange={(e) => handleLegChange(index, "overUnder", e.target.value)}
+                style={{
+                  color: leg.overUnder ? 'var(--primary-color)' : 'grey',
+                  border: errors.legs[index] && !leg.overUnder ? '2px solid red' : undefined
+                }}
+              >
+                <option value="" disabled hidden style={{ color: errors.legs[index] ? 'red' : 'grey' }}>Over/Under</option>
+                <option value="Over">Over</option>
+                <option value="Under">Under</option>
+              </select>
+            </label>
           </div>
         ))}
 
         <div style={{ marginTop: "1rem" }}>
-          <label style={{ color: 'red' }}>Risk:</label>
+          <label htmlFor="risk-input" style={{ color: 'red' }}>Risk:</label>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ marginRight: '4px', color: 'red' }}>$</span>
             <input
+              id="risk-input"
               type="number"
               value={totalRisk}
               onChange={(e) => setTotalRisk(e.target.value)}
@@ -150,10 +163,11 @@ export default function LogBetModal({ onClose, setPendingBets }) {
               style={{ flex: 1, color: 'red', border: errors.risk ? '2px solid red' : undefined }}
             />
           </div>
-          <label style={{ color: 'green' }}>Payout:</label>
+          <label htmlFor="payout-input" style={{ color: 'green' }}>Payout:</label>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ marginRight: '4px', color: 'green' }}>$</span>
             <input
+              id="payout-input"
               type="number"
               value={totalPayout}
               onChange={(e) => setTotalPayout(e.target.value)}
